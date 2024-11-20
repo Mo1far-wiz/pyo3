@@ -1,0 +1,21 @@
+[package]
+name = "password_hasher"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+# Назва рідної бібліотеки. Це ім'я, яке буде використано у Python для імпорту
+# бібліотеки (тобто `import password_hasher`). Якщо ви змінюєте його, ви також маєте змінити назву
+# `#[pymodule]` у `rc/lib.rs`.
+name = "password_hasher"
+# "cdylib" необхідний для створення спільної бібліотеки, з якої Python може імпортувати дані.
+#
+# Подальший код Rust (включно з кодом у `bin/`, `examples/` та `tests/`) не зможе
+# використовувати password_hasher;` якщо не включено тип ящика "rlib" або "lib", наприклад:
+# crate-type = ["cdylib", "rlib"]
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.22.6", features = ["extension-module"] }
+argon2 = "0.5.3"
+rand = "0.8.5"
